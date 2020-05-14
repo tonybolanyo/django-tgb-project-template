@@ -1,0 +1,8 @@
+# para que pygraphviz funcione es necesario instalar
+# algunas dependencias
+# este paquete tiene problemas de compilación en Windows y es necesario
+# descargar el archivo ya compilado .whl
+# apt-get update && apt-get install -y graphviz libgraphviz-dev pkg-config
+pygraphviz==1.5
+Sphinx==3.0.3
+sphinx-rtd-theme==0.4.3
