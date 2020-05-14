@@ -7,3 +7,4 @@ black==19.10b0
 django-debug-toolbar==2.2
 pre-commit==2.4.0
 pylint-django==2.0.15
+rosetta==0.3
