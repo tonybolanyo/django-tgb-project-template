@@ -13,9 +13,30 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+
+admin.site.site_header = '{{ project_name }} Backoffice'
 
 urlpatterns = [
+    path('admin/jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    path(
+        'admin/jet/dashboard', include('jet.dashboard.urls', 'jet-dashboard')
+    ),  # Django JET Dashboard URLS
     path('admin/', admin.site.urls),
+    path('health/', include('health_check.urls')),
 ]
+
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += [path('rosetta/', include('rosetta.urls'))]
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = (
+        [path('__debug__/', include(debug_toolbar.urls))]
+        + urlpatterns
+        + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    )
