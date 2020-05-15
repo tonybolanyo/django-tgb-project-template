@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    hostname: postgres
+    env_file:
+      - docker/postgres.env
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    hostname: dbadmin
+    ports:
+      - 5050:80
+    links:
+      - db:postgres
+    env_file:
+      - docker/pgadmin.env
+    volumes:
+      - db-admin:/var/lib/pgadmin
+
+
+  django:
+    build: ./docker
+    hostname: django
+    container_name: {{ project_name }}_django
+    restart: always
+    command: /wait_for_postgres.sh
+    user: 'tgb'
+    depends_on:
+      - db
+    env_file:
+      - docker/django.env
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/app
+      - ./docker/mnt:/mnt
+
+  docs:
+    image: nginx
+    restart: always
+    hostname: docs
+    ports:
+      - 8001:80
+    volumes:
+      - ./docs/_build/html:/usr/share/nginx/html
+
+volumes:
+  db-data:
+    external: true
+  db-admin:
+    external: true
