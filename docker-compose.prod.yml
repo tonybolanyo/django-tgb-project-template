@@ -3,7 +3,7 @@ version: '3'
 services:
   backend:
     image: '${WEB_IMAGE}'
-    command: gunicorn {{ prohect_name }}.wsgi:application -w 4 -b 0.0.0.0:8000 --chdir=/usr/src/app --log-file -
+    command: gunicorn {{ project_name }}.wsgi:application -w 4 -b 0.0.0.0:8000 --chdir=/usr/src/app --log-file -
     volumes:
       - ./docker/mnt/flags/:/mnt/flags/
       - static_volume:/usr/src/app/static

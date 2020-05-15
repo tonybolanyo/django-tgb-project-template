@@ -27,7 +27,9 @@ services:
 
 
   django:
-    build: ./docker
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
     hostname: django
     container_name: {{ project_name }}_django
     restart: always
