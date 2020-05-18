@@ -17,6 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from dashboard.views import DashboardView
 
 admin.site.site_header = '{{ project_name }} Backoffice'
 
@@ -27,6 +28,7 @@ urlpatterns = [
     ),  # Django JET Dashboard URLS
     path('admin/', admin.site.urls),
     path('health/', include('health_check.urls')),
+    path('', DashboardView.as_view(), name='dashboard_main'),
 ]
 
 if 'rosetta' in settings.INSTALLED_APPS:
