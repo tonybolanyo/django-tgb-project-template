@@ -23,9 +23,9 @@ RUN groupadd -g ${PGID} tgb && \
   useradd -u ${PUID} -g tgb -m tgb && \
   usermod -p "*" tgb -s /bin/bash
 
-COPY ../src /app/
-COPY ./start.sh /start.sh
-COPY ./wait_for_postgres.sh /wait_for_postgres.sh
+COPY ./src /app/
+COPY ./docker/start.sh /start.sh
+COPY ./docker/wait_for_postgres.sh /wait_for_postgres.sh
 RUN chmod +x /start.sh && chmod +x /wait_for_postgres.sh && mkdir /logs
 
 # ---- Python requirements
@@ -65,7 +65,7 @@ COPY --from=dependencies /app/requirements/base.txt /app/requirements/
 COPY ./requirements/dev.txt /app/requirements/
 RUN pip install -r /app/requirements/dev.txt && rm -rf /root/.cache
 
-COPY ./run_tests.sh /app/
+COPY ./docker/run_tests.sh /app/
 
 RUN chown -R tgb:tgb /app
 WORKDIR /app/src
