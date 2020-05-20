@@ -16,8 +16,8 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
-from dashboard.views import DashboardView
+from django.urls import include, path, re_path
+from tyrispages.views import index, pages
 
 admin.site.site_header = '{{ project_name }} Backoffice'
 
@@ -28,7 +28,12 @@ urlpatterns = [
     ),  # Django JET Dashboard URLS
     path('admin/', admin.site.urls),
     path('health/', include('health_check.urls')),
-    path('', DashboardView.as_view(), name='dashboard_main'),
+    # Matches any html file - to be used for gentella
+    # Avoid using your .html in your resources.
+    # Or create a separate django app.
+    re_path(r'^.*\.html', pages, name='pages'),
+    # The home page
+    path('', index, name='home'),
 ]
 
 if 'rosetta' in settings.INSTALLED_APPS:
