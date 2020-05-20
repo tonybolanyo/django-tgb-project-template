@@ -1,0 +1,69 @@
+{% load i18n %} {% extends 'base.html' %} {% block title %} {% trans 'Login' %}
+{% endblock %} {% block content %}
+
+<div class="row">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          {% trans 'Login' %}
+        </h4>
+      </div>
+      <div class="card-body">
+        <h6 class="card-category">
+          {% if msg %}
+          <span class="text-danger">{{ msg }}</span>
+          {% else %}
+          <a href="{% url 'register' %}"
+            >{% trans "Don't have an account? Register" %}</a
+          >
+          {% endif %}
+        </h6>
+
+        <br />
+
+        <form role="form" method="post" action="">
+          {% csrf_token %}
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">{% trans 'Username' %}</label>
+                {{ form.username }}
+              </div>
+            </div>
+          </div>
+
+          <br />
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">{% trans 'Password' %}</label>
+                {{ form.password }}
+              </div>
+            </div>
+          </div>
+
+          <br />
+
+          <button type="submit" name="login" class="btn btn-primary pull-left">
+            {% trans 'Login' %}
+          </button>
+
+          &nbsp; &nbsp;
+          <span class="pull-right">
+            {% trans "Don't have an account?" %}
+            <a href="{% url 'register' %}" class="text-primary"
+              >{% trans 'Create' %}</a
+            >
+          </span>
+
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
