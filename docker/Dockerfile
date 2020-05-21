@@ -1,6 +1,9 @@
 # ---- Python base ----
 FROM python:3.7-slim AS base
 
+# Needed for ERD docs generation
+RUN apt-get update && apt-get install -y graphviz libgraphviz-dev pkg-config
+
 # ---- Dependencias del sistema
 FROM base AS system-base
 
