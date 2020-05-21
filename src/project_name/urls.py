@@ -28,6 +28,8 @@ urlpatterns = [
     # Avoid using your .html in your resources.
     # Or create a separate django app.
     re_path(r'^.*\.html', pages, name='pages'),
+    # Auth pages
+    path('', include('auth.urls')),
     # The home page
     path('', index, name='home'),
 ]
