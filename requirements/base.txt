@@ -5,3 +5,4 @@ django-health-check==3.12.1
 django-tgb-basics==0.2.11
 gunicorn==20.0.4
 psycopg2-binary==2.8.5
+psutil==5.7.0
