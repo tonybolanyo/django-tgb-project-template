@@ -1,9 +1,6 @@
 # ---- Python base ----
 FROM python:3.7-slim AS base
 
-# Needed for ERD docs generation
-RUN apt-get update && apt-get install -y graphviz libgraphviz-dev pkg-config
-
 # ---- Dependencias del sistema
 FROM base AS system-base
 
@@ -25,6 +22,9 @@ ENV PGID ${PGID}
 RUN groupadd -g ${PGID} tgb && \
   useradd -u ${PUID} -g tgb -m tgb && \
   usermod -p "*" tgb -s /bin/bash
+
+# Needed for ERD docs generation
+RUN apt-get update && apt-get install -y graphviz libgraphviz-dev pkg-config
 
 COPY ./src /app/
 COPY ./docker/start.sh /start.sh
