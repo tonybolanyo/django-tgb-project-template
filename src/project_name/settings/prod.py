@@ -47,7 +47,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get(
-            'SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'
+            'DB_ENGINE', 'django.db.backends.postgresql_psycopg2'
         ),
         'NAME': os.environ.get('SQL_DATABASE', 'postgres'),
         'USER': os.environ.get('SQL_USER', 'postgres'),
