@@ -1,5 +1,5 @@
 # ---- Python base ----
-FROM python:3.7-slim AS base
+FROM python:3.7 AS base
 
 # ---- Dependencias del sistema
 FROM base AS system-base
@@ -26,7 +26,7 @@ RUN groupadd -g ${PGID} tgb && \
 # Needed for ERD docs generation
 RUN apt-get update && apt-get install -y graphviz libgraphviz-dev pkg-config
 
-COPY ./src /app/
+# COPY ./src /app/
 COPY ./docker/start.sh /start.sh
 COPY ./docker/wait_for_postgres.sh /wait_for_postgres.sh
 RUN chmod +x /start.sh && chmod +x /wait_for_postgres.sh && mkdir /logs
@@ -58,6 +58,7 @@ COPY ./requirements/prod.txt /app/requirements/
 RUN pip install -r /app/requirements/prod.txt && rm -rf /root/.cache
 
 RUN chown -R tgb:tgb /app
+COPY ./src /app/
 WORKDIR /app
 
 # ---- Development version

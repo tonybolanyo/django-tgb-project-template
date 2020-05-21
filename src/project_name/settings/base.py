@@ -36,8 +36,6 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
     # django
-    'jet.dashboard',
-    'jet',  # always before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +52,6 @@ INSTALLED_APPS = [
     'health_check.db',
     'health_check.contrib.psutil',
     'health_check.storage',
-    'rosetta',
     #
     # this project
     #
@@ -157,5 +154,3 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
-
-JET_DEFAULT_THEME = 'light-blue'

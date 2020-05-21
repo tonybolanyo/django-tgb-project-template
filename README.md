@@ -18,5 +18,9 @@ django-admin startproject --template https://github.com/tonybolanyo/django-tgb-p
 cp docker/django.env.sample docker/django.env
 cp docker/pgadmin.env.sample docker/pgadmin.env
 cp docker/postgres.env.sample docker/postgres.env
+
+docker volume create db-data
+docker volume create db-admin
+
 docker-compose up
 ```

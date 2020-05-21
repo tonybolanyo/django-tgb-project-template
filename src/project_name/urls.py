@@ -22,10 +22,6 @@ from tyrispages.views import index, pages
 admin.site.site_header = '{{ project_name }} Backoffice'
 
 urlpatterns = [
-    path('admin/jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    path(
-        'admin/jet/dashboard', include('jet.dashboard.urls', 'jet-dashboard')
-    ),  # Django JET Dashboard URLS
     path('admin/', admin.site.urls),
     path('health/', include('health_check.urls')),
     # Matches any html file - to be used for gentella
@@ -35,9 +31,6 @@ urlpatterns = [
     # The home page
     path('', index, name='home'),
 ]
-
-if 'rosetta' in settings.INSTALLED_APPS:
-    urlpatterns += [path('rosetta/', include('rosetta.urls'))]
 
 if settings.DEBUG:
     import debug_toolbar
