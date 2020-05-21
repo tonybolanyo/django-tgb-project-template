@@ -65,11 +65,16 @@ LOGGING = {
     },
     'loggers': {
         'django': {'handlers': ['file'], 'level': 'INFO', 'propagate': True},
-        'users': {
+        'auth': {
             'handlers': ['file', 'console'],
             'level': 'DEBUG',
             'propagate': True,
         },
+        # 'tu_app': {
+        #     'handlers': ['file'],
+        #     'level': 'WARN',
+        #     'propagate': True,
+        # }
     },
 }
 

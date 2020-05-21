@@ -96,7 +96,7 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
         },
-        'users': {
+        'auth': {
             'handlers': ['file', 'console'],
             'level': 'DEBUG',
             'propagate': True,
